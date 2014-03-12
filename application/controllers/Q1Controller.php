@@ -1,12 +1,13 @@
 <?php
 
-class IndexController extends Zend_Controller_Action
+class Q1Controller extends Zend_Controller_Action
 {
 
     public function indexAction()
     {
         $this->_helper->layout()->disableLayout(); 
         $this->_helper->viewRenderer->setNoRender(true);
-        echo "Dynamos,0000-0000-0000\n2000-00-00 00:00:00";
+        $date = (new Zend_Date())->toString("YYYY-MM-dd HH:mm:ss");
+        echo "Dynamos,0000-0000-0000\n$date";
     }
 }
