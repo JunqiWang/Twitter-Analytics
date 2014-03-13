@@ -1,2 +1,2 @@
-dynamos-tweets
+Twitter-Analytics
 ==============
