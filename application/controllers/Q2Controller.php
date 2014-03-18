@@ -34,6 +34,8 @@ class Q2Controller extends Zend_Controller_Action
 
     public static $dummy_attributes = array();
 
+    private $tee;
+
     public function indexAction()
     {
         $this->_helper->layout()->disableLayout();
@@ -48,7 +50,8 @@ class Q2Controller extends Zend_Controller_Action
         
         $transport->open();
         
-        $rowResult = $client->get(self::$table, "hi", "ids", self::$dummy_attributes);
+        $rowkey = $this->_request->getParam("userid") . $this->_request->getParam("tweettime");
+        $rowResult = $client->get(self::$table, $rowkey, "ids", self::$dummy_attributes);
         $this->printBack($rowResult);
         
         $transport->close();
