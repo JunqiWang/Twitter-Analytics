@@ -55,7 +55,6 @@ class Q2Controller extends Zend_Controller_Action
         $this->printBack($rowResult);
         
         $transport->close();
-        $socket->close();
     }
 
     private function printBack($rowresult)
