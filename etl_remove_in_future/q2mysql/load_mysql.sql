@@ -1,0 +1,8 @@
+LOAD DATA LOCAL INFILE '/home/ubuntu/mysqlQ2.csv'
+INTO TABLE tweet
+COLUMNS TERMINATED BY ','
+OPTIONALLY ENCLOSED BY '"'
+ESCAPED BY '"'
+LINES TERMINATED BY '\n'
+(user_time,tweet)
+SET id = NULL;
