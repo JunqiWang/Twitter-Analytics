@@ -1,5 +1,6 @@
 <?php
-$GLOBALS ["THRIFT_ROOT"] = "thriftphp";
+$GLOBALS ["THRIFT_ROOT"] = $_SERVER ["DOCUMENT_ROOT"] . "/lib/thriftphp";
+
 require_once ($GLOBALS ["THRIFT_ROOT"] . "/src/Thrift.php");
 
 require_once ($GLOBALS ["THRIFT_ROOT"] . "/lib/Thrift/Type/TMessageType.php");
