@@ -39,7 +39,7 @@ $transport->open ();
 
 $rowkey = $_GET ["userid"] . $_GET ["tweettime"];
 $rowResult = $client->get ( "uidtime2ids", $rowkey, "ids", array () );
-echo ("Dynamos,0000-0000-0000\n");
+echo ("Dynamos,2427-6611-7783\n");
 foreach ( $rowresult as $rs ) {
 	echo ("$rs->value\n");
 }
