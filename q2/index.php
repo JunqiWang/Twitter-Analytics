@@ -27,9 +27,8 @@ use Thrift\Exception;
 use Hbase\HbaseClient;
 use Hbase\ColumnDescriptor;
 use Hbase\Mutation;
-echo "yes";
-echo $_GET ["userid"] . $_GET ["tweettime"];
-$socket = new TSocket ( "localhost" );
+
+$socket = new TSocket ( "ec2-54-85-160-133.compute-1.amazonaws.com" );
 $socket->setSendTimeout ( 2000 );
 $socket->setRecvTimeout ( 4000 );
 $transport = new TBufferedTransport ( $socket );
@@ -38,10 +37,13 @@ $client = new HbaseClient ( $protocol );
 
 $transport->open ();
 
-$rowkey = $_GET ["userid"] . $_GET ["tweettime"];
+$rowkey = $_GET ["userid"] . $_GET ["tweet_time"];
+$rowkeya = split ( " ", $rowkey );
+$rowkey = $rowkeya[0] . "+" . $rowkeya[1];
 $rowResult = $client->get ( "uidtime2ids", $rowkey, "ids", array () );
+
 echo ("Dynamos,2427-6611-7783\n");
-foreach ( $rowresult as $rs ) {
+foreach ( $rowResult as $rs ) {
 	echo ("$rs->value\n");
 }
 
