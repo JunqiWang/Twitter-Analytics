@@ -38,8 +38,6 @@ $client = new HbaseClient ( $protocol );
 $transport->open ();
 
 $rowkey = $_GET ["userid"] . $_GET ["tweet_time"];
-$rowkeya = split ( " ", $rowkey );
-$rowkey = $rowkeya[0] . "+" . $rowkeya[1];
 $rowResult = $client->get ( "uidtime2ids", $rowkey, "ids", array () );
 
 echo ("Dynamos,2427-6611-7783\n");
