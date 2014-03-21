@@ -1,38 +1,50 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-</head>
-<body>
-	Dynamos,1234-5678-9012
-	<br>
-	<?php
-		//deal with get parameter
-		$userid = $_GET['userid'];
-		$time = $_GET['tweet_time'];
-		$formatedTime = date("Y-m-d-h-i-s", strtotime($time));
-		$user_time = $userid . '-' . $formatedTime;
+<?php
+$GLOBALS ["THRIFT_ROOT"] = $_SERVER ["DOCUMENT_ROOT"] . "/lib/thriftphp";
 
-		//connect to sql
-		$con = mysqli_connect("localhost","","", "test");
+require_once ($GLOBALS ["THRIFT_ROOT"] . "/src/Thrift.php");
 
-		// Check connection
-		if (mysqli_connect_errno()){
-  			echo "Failed to connect to MySQL: " . mysqli_connect_error();
-  		}
+require_once ($GLOBALS ["THRIFT_ROOT"] . "/lib/Thrift/Type/TMessageType.php");
+require_once ($GLOBALS ["THRIFT_ROOT"] . "/lib/Thrift/Type/TType.php");
+require_once ($GLOBALS ["THRIFT_ROOT"] . "/lib/Thrift/Exception/TException.php");
+require_once ($GLOBALS ["THRIFT_ROOT"] . "/lib/Thrift/Exception/TTransportException.php");
+require_once ($GLOBALS ["THRIFT_ROOT"] . "/lib/Thrift/Exception/TProtocolException.php");
+require_once ($GLOBALS ["THRIFT_ROOT"] . "/lib/Thrift/Factory/TStringFuncFactory.php");
+require_once ($GLOBALS ["THRIFT_ROOT"] . "/lib/Thrift/StringFunc/TStringFunc.php");
+require_once ($GLOBALS ["THRIFT_ROOT"] . "/lib/Thrift/StringFunc/Core.php");
+require_once ($GLOBALS ["THRIFT_ROOT"] . "/lib/Thrift/Transport/TTransport.php");
+require_once ($GLOBALS ["THRIFT_ROOT"] . "/lib/Thrift/Transport/TSocket.php");
+require_once ($GLOBALS ["THRIFT_ROOT"] . "/lib/Thrift/Transport/TBufferedTransport.php");
+require_once ($GLOBALS ["THRIFT_ROOT"] . "/lib/Thrift/Protocol/TProtocol.php");
+require_once ($GLOBALS ["THRIFT_ROOT"] . "/lib/Thrift/Protocol/TBinaryProtocol.php");
 
-		$query = "SELECT * FROM tweet Where user_time = \"" . $user_time . "\";";
-		$result = mysqli_query($con,$query);
-		if(!$result){
-			printf("Error: %s\n", mysqli_error($con));
-    		exit();
-		}
+require_once ($GLOBALS ["THRIFT_ROOT"] . "/packages/Hbase/Hbase.php");
+require_once ($GLOBALS ["THRIFT_ROOT"] . "/packages/Hbase/Types.php");
 
-		while($row = mysqli_fetch_array($result)){
-  			echo $row['tweet'] . "<br>";
-  		}
+use Thrift\Transport\TSocket;
+use Thrift\Transport\TBufferedTransport;
+use Thrift\Protocol\TBinaryProtocol;
+use Thrift\Exception;
+use Hbase\HbaseClient;
+use Hbase\ColumnDescriptor;
+use Hbase\Mutation;
+echo "yes";
+echo $_GET ["userid"] . $_GET ["tweettime"];
+$socket = new TSocket ( "localhost" );
+$socket->setSendTimeout ( 2000 );
+$socket->setRecvTimeout ( 4000 );
+$transport = new TBufferedTransport ( $socket );
+$protocol = new TBinaryProtocol ( $transport );
+$client = new HbaseClient ( $protocol );
 
-mysqli_close($con);
+$transport->open ();
+
+$rowkey = $_GET ["userid"] . $_GET ["tweettime"];
+$rowResult = $client->get ( "uidtime2ids", $rowkey, "ids", array () );
+echo ("Dynamos,2427-6611-7783\n");
+foreach ( $rowresult as $rs ) {
+	echo ("$rs->value\n");
+}
+
+$transport->close ();
+
 ?>
-</body>
-</html>
