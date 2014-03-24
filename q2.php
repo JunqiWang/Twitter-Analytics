@@ -21,7 +21,7 @@ use Thrift\Transport\TBufferedTransport;
 use Thrift\Protocol\TBinaryProtocol;
 use Hbase\HbaseClient;
 
-$socket = new TSocket ( "54.85.163.35" );
+$socket = new TSocket ( "54.85.132.133" );
 $transport = new TBufferedTransport ( $socket );
 $protocol = new TBinaryProtocol ( $transport );
 $client = new HbaseClient ( $protocol );
@@ -29,6 +29,7 @@ $client = new HbaseClient ( $protocol );
 $transport->open ();
 
 $rowkey = $_GET ["userid"] . $_GET ["tweet_time"];
+
 $rowResult = $client->get ( "uidtime2ids", $rowkey, "ids", array () );
 
 echo ("Dynamos,2427-6611-7783\n");
