@@ -21,7 +21,7 @@ use Thrift\Transport\TBufferedTransport;
 use Thrift\Protocol\TBinaryProtocol;
 use Hbase\HbaseClient;
 
-$socket = new TSocket ( "54.85.12.30" );
+$socket = new TSocket ( "54.85.105.47" );
 $transport = new TBufferedTransport ( $socket );
 $protocol = new TBinaryProtocol ( $transport );
 $client = new HbaseClient ( $protocol );
