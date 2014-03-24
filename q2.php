@@ -35,7 +35,7 @@ $rowResult = $client->get ( "uidtime2ids", $rowkey, "ids", array () );
 echo ("Dynamos,2427-6611-7783\n");
 asort($rowResult);
 foreach ( $rowResult as $rs ) {
-	echo ("$rs->value\n");
+	echo ("$rs->value");
 }
 
 $transport->close ();
