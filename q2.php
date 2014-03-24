@@ -32,6 +32,7 @@ $rowkey = $_GET ["userid"] . $_GET ["tweet_time"];
 $rowResult = $client->get ( "uidtime2ids", $rowkey, "ids", array () );
 
 echo ("Dynamos,2427-6611-7783\n");
+asort($rowResult);
 foreach ( $rowResult as $rs ) {
 	echo ("$rs->value\n");
 }
