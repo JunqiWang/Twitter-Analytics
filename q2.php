@@ -28,7 +28,7 @@ use Hbase\HbaseClient;
 use Hbase\ColumnDescriptor;
 use Hbase\Mutation;
 
-$socket = new TSocket ( "ec2-54-85-160-133.compute-1.amazonaws.com" );
+$socket = new TSocket ( "54.84.145.26" );
 $socket->setSendTimeout ( 2000 );
 $socket->setRecvTimeout ( 4000 );
 $transport = new TBufferedTransport ( $socket );
