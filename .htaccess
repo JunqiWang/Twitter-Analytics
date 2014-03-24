@@ -1,4 +1,5 @@
 <IfModule mod_rewrite.c>
     RewriteEngine on
-    RewriteRule ^([a-zA-Z0-9]+)$1.php [L]
+    RewriteRule q1 q1.php
+    RewriteRule q2 q2.php
 </IfModule>
