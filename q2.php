@@ -1,13 +1,9 @@
 <?php
 $GLOBALS ["THRIFT_ROOT"] = $_SERVER ["DOCUMENT_ROOT"] . "/lib/thriftphp";
 
-require_once ($GLOBALS ["THRIFT_ROOT"] . "/src/Thrift.php");
-
 require_once ($GLOBALS ["THRIFT_ROOT"] . "/lib/Thrift/Type/TMessageType.php");
 require_once ($GLOBALS ["THRIFT_ROOT"] . "/lib/Thrift/Type/TType.php");
 require_once ($GLOBALS ["THRIFT_ROOT"] . "/lib/Thrift/Exception/TException.php");
-require_once ($GLOBALS ["THRIFT_ROOT"] . "/lib/Thrift/Exception/TTransportException.php");
-require_once ($GLOBALS ["THRIFT_ROOT"] . "/lib/Thrift/Exception/TProtocolException.php");
 require_once ($GLOBALS ["THRIFT_ROOT"] . "/lib/Thrift/Factory/TStringFuncFactory.php");
 require_once ($GLOBALS ["THRIFT_ROOT"] . "/lib/Thrift/StringFunc/TStringFunc.php");
 require_once ($GLOBALS ["THRIFT_ROOT"] . "/lib/Thrift/StringFunc/Core.php");
@@ -23,26 +19,17 @@ require_once ($GLOBALS ["THRIFT_ROOT"] . "/packages/Hbase/Types.php");
 use Thrift\Transport\TSocket;
 use Thrift\Transport\TBufferedTransport;
 use Thrift\Protocol\TBinaryProtocol;
-use Thrift\Exception;
 use Hbase\HbaseClient;
-use Hbase\ColumnDescriptor;
-use Hbase\Mutation;
 
-$socket = new TSocket ( "54.84.145.26" );
-$socket->setSendTimeout ( 2000 );
-$socket->setRecvTimeout ( 4000 );
+$socket = new TSocket ( "54.85.12.30" );
 $transport = new TBufferedTransport ( $socket );
 $protocol = new TBinaryProtocol ( $transport );
 $client = new HbaseClient ( $protocol );
 
 $transport->open ();
 
-$table = "uidtime2ids";
-$colfmly = "ids";
-$dummy_attr = array ();
-
 $rowkey = $_GET ["userid"] . $_GET ["tweet_time"];
-$rowResult = $client->get ( $table, $rowkey, $colfmly, $dummy_attr );
+$rowResult = $client->get ( "uidtime2ids", $rowkey, "ids", array () );
 
 echo ("Dynamos,2427-6611-7783\n");
 foreach ( $rowResult as $rs ) {
