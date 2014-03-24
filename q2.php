@@ -37,8 +37,12 @@ $client = new HbaseClient ( $protocol );
 
 $transport->open ();
 
+$table = "uidtime2ids";
+$colfmly = "ids";
+$dummy_attr = array ();
+
 $rowkey = $_GET ["userid"] . $_GET ["tweet_time"];
-$rowResult = $client->get ( "uidtime2ids", $rowkey, "ids", array () );
+$rowResult = $client->get ( $table, $rowkey, $colfmly, $dummy_attr );
 
 echo ("Dynamos,2427-6611-7783\n");
 foreach ( $rowResult as $rs ) {
