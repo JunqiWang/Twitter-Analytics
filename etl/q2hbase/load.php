@@ -27,9 +27,10 @@ use Hbase\HbaseClient;
 use Hbase\ColumnDescriptor;
 use Hbase\Mutation;
 
+/* Change the url to HBase server, default port is 9090 */
 $socket = new TSocket ( 'ec2-54-84-13-192.compute-1.amazonaws.com' );
-$socket->setSendTimeout ( 10000 ); // Ten seconds (too long for production, but this is just a demo ;)
-$socket->setRecvTimeout ( 20000 ); // Twenty seconds
+$socket->setSendTimeout ( 10000 );
+$socket->setRecvTimeout ( 20000 );
 $transport = new TBufferedTransport ( $socket );
 $protocol = new TBinaryProtocol ( $transport );
 $client = new HbaseClient ( $protocol );
