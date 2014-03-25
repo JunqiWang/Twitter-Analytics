@@ -1,7 +1,9 @@
-DROP TABLE IF EXISTS `tweet`;
-CREATE TABLE `tweet`(
+DROP TABLE IF EXISTS tweet;
+CREATE TABLE tweet(
 id INT NOT NULL AUTO_INCREMENT, 
 PRIMARY KEY(id),
 user_time VARCHAR( 30 ) ,
 tweet VARCHAR( 30 )
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+Describe tweet;

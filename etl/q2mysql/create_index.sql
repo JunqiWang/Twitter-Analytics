@@ -1,0 +1,1 @@
+CREATE INDEX idx_user_time ON tweet (user_time);
